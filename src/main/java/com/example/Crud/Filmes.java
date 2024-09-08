@@ -1,10 +1,22 @@
 package com.example.Crud;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "filmes")
 public class Filmes {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
     private String diretor;
     private int anoLancamento;
+
+    @ManyToOne  // Um cinema pode ter muitos filmes
+    @JoinColumn(name = "cinema_id")
+    private Cinema cinema;
 
     public Long getId() {
         return id;
@@ -35,5 +47,12 @@ public class Filmes {
 
     public void setAnoLancamento(int anoLancamento) {
         this.anoLancamento = anoLancamento;
+    }
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 }
