@@ -1,0 +1,25 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"    # Porta padrão do RabbitMQ
+      - "15672:15672"  # Porta do console de gerenciamento
+    networks:
+      - mynetwork
+
+  springboot-app:
+    build:
+      context: .  # Caminho onde está o Dockerfile
+    ports:
+      - "8080:8080"  # Porta que sua aplicação Spring Boot vai usar
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
