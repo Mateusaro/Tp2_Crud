@@ -1,10 +1,10 @@
 package com.example.Crud;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
@@ -26,18 +26,21 @@ public class FilmeServiceTest {
     @Mock
     private CinemaRepository cinemaRepository;
 
-    @InjectMocks
-    private FilmeService filmeService;
-    @Autowired
+    @Mock
     private CepClient cepClient;
 
-    public FilmeServiceTest() {
+    @InjectMocks
+    private FilmeService filmeService;
+
+    @BeforeEach
+    public void setup() {
+        // Inicializa os mocks e injeta dependências
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void testSaveFilme() {
-        // Arrange
+        // Arrange: Configura dados de teste
         Filmes filme = new Filmes();
         filme.setTitulo("Inception");
         filme.setDiretor("Christopher Nolan");
@@ -68,14 +71,15 @@ public class FilmeServiceTest {
 
         when(filmeHistoricoRepository.save(any(FilmeHistorico.class))).thenReturn(historico);
 
-        // Act
+        // Act: Chama o método de salvar o filme
         Filmes savedFilme = filmeService.saveFilme(filme, 1L, "01001000"); // Passando cinemaId e cep
 
-        // Assert
+        // Assert: Verifica se o filme foi salvo corretamente
         assertEquals(filme.getTitulo(), savedFilme.getTitulo());
         assertEquals(filme.getDiretor(), savedFilme.getDiretor());
         assertEquals(filme.getAnoLancamento(), savedFilme.getAnoLancamento());
 
+        // Verifica se os métodos corretos foram chamados
         verify(filmesRepository, times(1)).save(filme);
         verify(filmeHistoricoRepository, times(1)).save(any(FilmeHistorico.class));
         verify(cinemaRepository, times(1)).findById(1L);
