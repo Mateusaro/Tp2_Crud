@@ -4,10 +4,16 @@ FROM eclipse-temurin:17-jdk-jammy as builder
 # Define o diretório de trabalho
 WORKDIR /app
 
-# Copia o arquivo pom.xml e baixa as dependências
+# Copia o arquivo pom.xml e os scripts do Maven Wrapper
 COPY pom.xml ./
 COPY mvnw ./
 COPY .mvn ./.mvn
+
+# Corrige as permissões do Maven Wrapper para garantir que ele pode ser executado
+RUN chmod +x mvnw
+
+# Liste os arquivos para verificar a presença do mvnw
+RUN ls -l
 
 # Baixa as dependências sem construir a aplicação (opcional, mas acelera o build)
 RUN ./mvnw dependency:go-offline -B
