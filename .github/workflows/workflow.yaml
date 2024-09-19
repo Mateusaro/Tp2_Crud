@@ -1,0 +1,56 @@
+name: Build and Push Docker Image
+
+# Aciona o workflow quando há push na branch main
+on:
+  push:
+    branches:
+      - master
+
+  # Também pode ser acionado manualmente
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checar o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Passo 2: Instalar JDK 17 (ou versão necessária)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      # Passo 3: Cache do Maven para melhorar a performance
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Passo 4: Build com Maven (gera o arquivo .jar)
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      # Passo 5: Configurar login no Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Passo 6: Build da imagem Docker
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/crud-crud-service:latest .
+
+      # Passo 7: Fazer o push da imagem para o Docker Hub
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/crud-crud-service:latest
