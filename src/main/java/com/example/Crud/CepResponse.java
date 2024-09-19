@@ -8,7 +8,6 @@ public class CepResponse {
     private String localidade;
     private String uf;
 
-    // Getters e Setters
 
     public String getCep() {
         return cep;

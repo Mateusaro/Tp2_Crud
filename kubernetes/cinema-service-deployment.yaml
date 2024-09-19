@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinema-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cinema-service
+  template:
+    metadata:
+      labels:
+        app: cinema-service
+    spec:
+      containers:
+        - name: cinema-service
+          image: mateusol22/crud-cinema-service:latest
+          ports:
+            - containerPort: 8082

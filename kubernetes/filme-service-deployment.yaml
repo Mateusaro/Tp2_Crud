@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filme-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filme-service
+  template:
+    metadata:
+      labels:
+        app: filme-service
+    spec:
+      containers:
+        - name: filme-service
+          image: mateusol22/crud-filme-service:latest
+          ports:
+            - containerPort: 8083

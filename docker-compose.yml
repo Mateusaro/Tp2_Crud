@@ -1,25 +1,71 @@
-version: '3'
-services:
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"    # Porta padrão do RabbitMQ
-      - "15672:15672"  # Porta do console de gerenciamento
-    networks:
-      - mynetwork
+version: '3.8'
 
-  springboot-app:
+services:
+  cep-service:
     build:
-      context: .  # Caminho onde está o Dockerfile
+      context: ../apicep
+      dockerfile: Dockerfile
+    container_name: apicep
     ports:
-      - "8080:8080"  # Porta que sua aplicação Spring Boot vai usar
+      - "8081:8081"
+    networks:
+      - app-network
     depends_on:
       - rabbitmq
-    environment:
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SPRING_RABBITMQ_PORT: 5672
+
+  cinema-service:
+    build:
+      context: ../cinema
+      dockerfile: Dockerfile
+    container_name: cinema
+    ports:
+      - "8082:8082"
     networks:
-      - mynetwork
+      - app-network
+    depends_on:
+      - rabbitmq
+
+  filme-service:
+    build:
+      context: ../filme
+      dockerfile: Dockerfile
+    container_name: filme
+    ports:
+      - "8083:8083"
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+
+  crud-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: Crud
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "rabbitmqctl status" ]
+      interval: 30s  # Tempo de intervalo entre verificações
+      timeout: 10s   # Timeout para a verificação
+      retries: 5     # Quantas tentativas antes de considerar como falha
 
 networks:
-  mynetwork:
+  app-network:
+    driver: bridge

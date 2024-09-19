@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cep-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cep-service
+  template:
+    metadata:
+      labels:
+        app: cep-service
+    spec:
+      containers:
+        - name: cep-service
+          image: mateusol22/crud-cep-service:latest
+          ports:
+            - containerPort: 8081

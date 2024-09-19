@@ -1,21 +1,24 @@
 package com.example.Crud;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "cinemas")
-public class Cinema {
+public class Cinema implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
     private String cep;
     private String logradouro;
     private String bairro;
     private String localidade;
     private String uf;
+
+    // Construtor padrão
+    public Cinema() {}
+
+    // Construtor com ID
+    public Cinema(Long id) {
+        this.id = id;
+    }
 
     // Getters e Setters
     public Long getId() {

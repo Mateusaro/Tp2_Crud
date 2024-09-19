@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crud
+  template:
+    metadata:
+      labels:
+        app: crud
+    spec:
+      containers:
+        - name: crud
+          image: mateusol2/crud-crud-service:latest # Substitua pela imagem correta
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_RABBITMQ_HOST
+              value: rabbitmq  # RabbitMQ no Kubernetes Service
+            - name: SPRING_RABBITMQ_PORT
+              value: "5672"
+            - name: SPRING_RABBITMQ_USERNAME
+              value: guest
+            - name: SPRING_RABBITMQ_PASSWORD
+              value: guest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crud-service
+spec:
+  selector:
+    app: crud
+  ports:
+    - port: 8080
+      targetPort: 8080

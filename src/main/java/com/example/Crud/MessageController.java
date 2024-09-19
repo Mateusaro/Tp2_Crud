@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.*;
 public class MessageController {
 
     @Autowired
-    private RabbitMQService rabbitMQService;
+    private RabbitService rabbitService;
 
-    @PostMapping
-    public void sendMessage(@RequestBody String message) {
-        rabbitMQService.sendMessage(message);
+    @PostMapping("/cinema")
+    public void sendCinemaMessage(@RequestBody Cinema cinema) {
+        rabbitService.sendCinemaMessage(cinema);
+    }
+
+    @PostMapping("/filme")
+    public void sendFilmeMessage(@RequestBody Filme filme) {
+        rabbitService.sendFilmeMessage(filme);
     }
 }
