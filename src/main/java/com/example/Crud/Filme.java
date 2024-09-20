@@ -9,21 +9,17 @@ public class Filme implements Serializable {
     private String titulo;
     private String diretor;
     private int anoLancamento;
-    private Long cinemaId;  // ID do cinema ao qual o filme está relacionado
+    private Long cinemaId;
 
-    // Para auditoria
     private String ultimaAcao;
     private LocalDateTime dataUltimaAlteracao;
 
-    // Construtor padrão
     public Filme() {}
 
-    // Construtor com ID
     public Filme(Long id) {
         this.id = id;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: crud
-          image: mateusol2/crud-crud-service:latest # Substitua pela imagem correta
+          image: mateusol22/api-gate:latest # Substitua pela imagem correta
           ports:
             - containerPort: 8080
           env:

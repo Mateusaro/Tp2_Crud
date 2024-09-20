@@ -3,6 +3,8 @@ package com.example.Crud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/filmes")
 public class FilmeController {
@@ -15,9 +17,9 @@ public class FilmeController {
         return filmeService.createFilme(filme);
     }
 
-    @GetMapping("/{id}")
-    public Filme getFilmeById(@PathVariable Long id) {
-        return filmeService.getFilmeById(id);
+    @GetMapping("/historico")
+    public List<FilmeHistorico> getHistorico() {
+        return filmeService.getHistorico();  // Chama o serviço para obter o histórico
     }
 
     @PutMapping("/{id}")

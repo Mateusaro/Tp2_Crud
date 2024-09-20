@@ -19,7 +19,6 @@ public class Endereco {
     @JsonProperty("uf")
     private String uf;
 
-    // Getters e Setters
     public String getCep() {
         return cep;
     }

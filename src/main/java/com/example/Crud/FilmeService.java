@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -24,10 +25,6 @@ public class FilmeService {
         log.info("Filme Criado: " + createdFilme);
 
         return createdFilme;
-    }
-
-    public Filme getFilmeById(Long id) {
-        return filmeClient.getFilmeById(id);
     }
 
     public Filme updateFilme(Long id, Filme filme) {
@@ -57,5 +54,9 @@ public class FilmeService {
 
         // Envia uma mensagem para a fila de filmes para indicar exclusão
         rabbitService.sendFilmeMessage(filme);
+    }
+
+    public List<FilmeHistorico> getHistorico() {
+        return filmeClient.getFilmeHistorico();
     }
 }

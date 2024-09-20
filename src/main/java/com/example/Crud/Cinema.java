@@ -12,15 +12,12 @@ public class Cinema implements Serializable {
     private String localidade;
     private String uf;
 
-    // Construtor padrão
     public Cinema() {}
 
-    // Construtor com ID
     public Cinema(Long id) {
         this.id = id;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }

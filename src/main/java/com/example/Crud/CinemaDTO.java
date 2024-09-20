@@ -5,7 +5,6 @@ public class CinemaDTO {
     private String nome;
     private String cep;
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }

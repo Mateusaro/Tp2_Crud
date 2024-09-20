@@ -3,7 +3,7 @@ version: '3.8'
 services:
   cep-service:
     build:
-      context: ../apicep
+      context: C:\Users\mateu\OneDrive\Desktop\BACKUP PROJETO JAVA\ProjetoDeBlocoCinema\apicep
       dockerfile: Dockerfile
     container_name: apicep
     ports:
@@ -15,7 +15,7 @@ services:
 
   cinema-service:
     build:
-      context: ../cinema
+      context: C:\Users\mateu\OneDrive\Desktop\BACKUP PROJETO JAVA\ProjetoDeBlocoCinema\cinema
       dockerfile: Dockerfile
     container_name: cinema
     ports:
@@ -27,7 +27,7 @@ services:
 
   filme-service:
     build:
-      context: ../filme
+      context: C:\Users\mateu\OneDrive\Desktop\BACKUP PROJETO JAVA\ProjetoDeBlocoCinema\filme
       dockerfile: Dockerfile
     container_name: filme
     ports:
@@ -39,7 +39,7 @@ services:
 
   crud-service:
     build:
-      context: ./
+      context: C:\Users\mateu\OneDrive\Desktop\BACKUP PROJETO JAVA\ProjetoDeBlocoCinema\crud
       dockerfile: Dockerfile
     container_name: Crud
     ports:
