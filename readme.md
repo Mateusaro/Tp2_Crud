@@ -24,7 +24,7 @@ cd <nome-do-repositorio>
 ## Executando o Docker Compose
 O projeto inclui um arquivo docker-compose.yml 
 
-***Atentar aos endereços do Dockerfile no arquivo DockerCompose pois cada microsserviço tem o seu próprio Dockerfile***
+***Atentar aos endereços do Dockerfile no arquivo DockerCompose pois cada microsserviço tem o seu próprio Dockerfile e precisa ser relacionado corretamente***
 
 Para executar o Docker Compose, siga os passos abaixo:
 
