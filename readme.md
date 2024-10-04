@@ -1,6 +1,6 @@
 # Assessment Projeto de Bloco
 
-A aplicação consiste em um sistema de gerenciamento de tarefas para usuários
+A aplicação consiste em um sistema de gerenciamento de Cinemas e Filmes
 
 ## Pré-requisitos
 
