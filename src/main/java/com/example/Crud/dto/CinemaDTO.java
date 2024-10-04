@@ -1,4 +1,4 @@
-package com.example.Crud;
+package com.example.Crud.dto;
 
 public class CinemaDTO {
 

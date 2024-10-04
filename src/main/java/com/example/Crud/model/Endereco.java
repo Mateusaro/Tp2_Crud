@@ -1,38 +1,23 @@
-package com.example.Crud;
+package com.example.Crud.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Cinema implements Serializable {
+public class Endereco {
 
-    private Long id;
-    private String nome;
+    @JsonProperty("cep")
     private String cep;
+
+    @JsonProperty("logradouro")
     private String logradouro;
+
+    @JsonProperty("bairro")
     private String bairro;
+
+    @JsonProperty("localidade")
     private String localidade;
+
+    @JsonProperty("uf")
     private String uf;
-
-    public Cinema() {}
-
-    public Cinema(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getCep() {
         return cep;

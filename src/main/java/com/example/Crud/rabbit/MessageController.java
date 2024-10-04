@@ -1,5 +1,7 @@
-package com.example.Crud;
+package com.example.Crud.rabbit;
 
+import com.example.Crud.model.Cinema;
+import com.example.Crud.model.Filme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

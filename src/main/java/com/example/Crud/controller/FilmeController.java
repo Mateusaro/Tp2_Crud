@@ -1,5 +1,8 @@
-package com.example.Crud;
+package com.example.Crud.controller;
 
+import com.example.Crud.model.FilmeHistorico;
+import com.example.Crud.service.FilmeService;
+import com.example.Crud.model.Filme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +22,7 @@ public class FilmeController {
 
     @GetMapping("/historico")
     public List<FilmeHistorico> getHistorico() {
-        return filmeService.getHistorico();  // Chama o serviço para obter o histórico
+        return filmeService.getHistorico();
     }
 
     @PutMapping("/{id}")

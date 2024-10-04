@@ -1,5 +1,6 @@
-package com.example.Crud;
+package com.example.Crud.feign;
 
+import com.example.Crud.CepResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

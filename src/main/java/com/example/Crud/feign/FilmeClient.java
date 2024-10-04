@@ -1,5 +1,7 @@
-package com.example.Crud;
+package com.example.Crud.feign;
 
+import com.example.Crud.model.FilmeHistorico;
+import com.example.Crud.model.Filme;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

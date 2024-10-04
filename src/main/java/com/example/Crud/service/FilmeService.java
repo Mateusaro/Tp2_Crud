@@ -1,5 +1,9 @@
-package com.example.Crud;
+package com.example.Crud.service;
 
+import com.example.Crud.rabbit.RabbitService;
+import com.example.Crud.feign.FilmeClient;
+import com.example.Crud.model.Filme;
+import com.example.Crud.model.FilmeHistorico;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +24,10 @@ public class FilmeService {
     public Filme createFilme(Filme filme) {
         filme.setUltimaAcao("Criação");
         filme.setDataUltimaAlteracao(LocalDateTime.now());
-        Filme createdFilme = filmeClient.createFilme(filme);
-        rabbitService.sendFilmeMessage(createdFilme);
-        log.info("Filme Criado: " + createdFilme);
+        rabbitService.sendFilmeMessage(filme);
+        log.info("Filme Criado: " + filme);
 
-        return createdFilme;
+        return filme;
     }
 
     public Filme updateFilme(Long id, Filme filme) {

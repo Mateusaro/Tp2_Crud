@@ -1,4 +1,4 @@
-package com.example.Crud;
+package com.example.Crud.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

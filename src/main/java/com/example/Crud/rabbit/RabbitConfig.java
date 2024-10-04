@@ -1,4 +1,4 @@
-package com.example.Crud;
+package com.example.Crud.rabbit;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

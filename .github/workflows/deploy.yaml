@@ -1,28 +1,40 @@
-name: Deploy to Kubernetes
+name: CD Workflow
 
 on:
   push:
     branches:
       - master
+  workflow_run:
+    workflows: ["CI Workflow"]
+    types:
+      - completed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Kubectl
-        uses: azure/setup-kubectl@v3
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v1
         with:
           version: 'latest'
 
-      - name: Configure kubeconfig
+      - name: Configure Kubernetes context
         run: |
-          echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+          minikube start
+          kubectl config use-context minikube
 
-      - name: Deploy to Kubernetes
+      - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f ../kubernetes/springboot-app-deployment.yaml
-          kubectl apply -f ./springboot-app-service-nodeport.yaml
+          kubectl apply -f kubernetes/rabbitmq-deployment.yaml
+          kubectl apply -f kubernetes/cep-service-deployment.yaml
+          kubectl apply -f kubernetes/springboot-app-deployment.yaml
+          kubectl apply -f kubernetes/springboot-app-service-nodeport.yaml
+          kubectl apply -f kubernetes/cinema-service-deployment.yaml
+          kubectl apply -f kubernetes/cinema-service-service.yaml
+          kubectl apply -f kubernetes/filme-service-deployment.yaml
+          kubectl apply -f kubernetes/filme-service-service.yaml
+          

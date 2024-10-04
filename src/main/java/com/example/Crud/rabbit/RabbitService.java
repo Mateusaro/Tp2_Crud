@@ -1,5 +1,7 @@
-package com.example.Crud;
+package com.example.Crud.rabbit;
 
+import com.example.Crud.model.Cinema;
+import com.example.Crud.model.Filme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -32,11 +34,11 @@ public class RabbitService {
         log.info("Mensagem de Filme enviada:: " + filme);
     }
 
-    @RabbitListener(queues = "#{@cinemaQueue.name}")
-    public void receiveCinemaMessage(Cinema cinema) {
-        log.info("Mensagem de Cinema recebida: " + cinema);
-    }
+    //RabbitListener(queues = "#{@cinemaQueue.name}")
+    //public void receiveCinemaMessage(Cinema cinema) {
+        //log.info("Mensagem de Cinema recebida: " + cinema);
+    //}
 
-    @RabbitListener(queues = "#{@filmeQueue.name}")
-    public void receiveFilmeMessage(Filme filme) { log.info("Mensagem de Filme recebida: " + filme);}
+    //@RabbitListener(queues = "#{@filmeQueue.name}")
+    //public void receiveFilmeMessage(Filme filme) { log.info("Mensagem de Filme recebida: " + filme);}
 }

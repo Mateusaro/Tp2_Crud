@@ -15,5 +15,6 @@ spec:
       containers:
         - name: cep-service
           image: mateusol22/crud-cep-service:latest
+          #image: mateusol22/crud-cep-service:latest
           ports:
             - containerPort: 8081

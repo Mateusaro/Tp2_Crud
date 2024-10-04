@@ -1,5 +1,10 @@
-package com.example.Crud;
+package com.example.Crud.service;
 
+import com.example.Crud.CepResponse;
+import com.example.Crud.rabbit.RabbitService;
+import com.example.Crud.feign.CinemaClient;
+import com.example.Crud.model.Cinema;
+import com.example.Crud.model.CinemaHistorico;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,15 +34,16 @@ public class CinemaService {
         cinema.setBairro(cepResponse.getBairro());
         cinema.setLocalidade(cepResponse.getLocalidade());
         cinema.setUf(cepResponse.getUf());
+        rabbitService.sendCinemaMessage(cinema);
 
-        Cinema createdCinema = cinemaClient.createCinema(cinema);
-
-        rabbitService.sendCinemaMessage(createdCinema);
-
-        log.info("Cinema Criado: " + createdCinema);
+        log.info("Cinema Criado: " + cinema);
 
 
-        return createdCinema;
+        return cinema;
+    }
+
+    public List<Cinema> getCinemas() {
+        return cinemaClient.getCinemas();
     }
 
 
@@ -57,9 +63,6 @@ public class CinemaService {
         log.info("Cinema Deletado: " + id);
 
         rabbitService.sendCinemaMessage(new Cinema(id));
-    }
-    public List<CinemaHistorico> getHistorico() {
-        return cinemaClient.getHistorico();
     }
 
 }

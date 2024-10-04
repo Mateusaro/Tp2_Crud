@@ -1,5 +1,7 @@
-package com.example.Crud;
+package com.example.Crud.feign;
 
+import com.example.Crud.model.CinemaHistorico;
+import com.example.Crud.model.Cinema;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,9 @@ import java.util.List;
 public interface CinemaClient {
 
     @GetMapping("/cinemas")
+    List<Cinema> getCinemas();
+
+    @GetMapping("/cinemas/historico")
     List<CinemaHistorico> getHistorico();  // Novo método para histórico
 
     @PostMapping("/cinemas")
@@ -20,4 +25,3 @@ public interface CinemaClient {
     @DeleteMapping("/cinemas/delete/{id}")
     void deleteCinema(@PathVariable("id") Long id);
 }
-

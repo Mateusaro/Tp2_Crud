@@ -1,5 +1,10 @@
 package com.example.Crud;
 
+import com.example.Crud.controller.CinemaController;
+import com.example.Crud.dto.CinemaDTO;
+import com.example.Crud.model.Cinema;
+import com.example.Crud.service.CinemaService;
+import com.example.Crud.service.FilmeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
