@@ -1,6 +1,6 @@
 # Assessment Projeto de Bloco
 
-A aplicação consiste em um sistema de gerenciamento de Cinemas e Filmes
+A aplicação consiste em um sistema de gerenciamento de Cinemas e Filmes.
 
 ## Pré-requisitos
 
@@ -24,7 +24,7 @@ cd <nome-do-repositorio>
 ## Executando o Docker Compose
 O projeto inclui um arquivo docker-compose.yml 
 
-***Atentar aos endereços do Dockerfile no arquivo DockerCompose pois cada microsserviço tem o seu próprio Dockerfile e precisa ser relacionado corretamente***
+***Atentar aos endereços do Dockerfile no arquivo DockerCompose pois cada microsserviço tem o seu próprio Dockerfile e precisa ser relacionado corretamente.***
 
 Para executar o Docker Compose, siga os passos abaixo:
 
@@ -86,7 +86,7 @@ kubectl port-forward {Pod do rabbitmq-deployment.yaml} 15672:15672
     "cep" : "22775046" 
 }
 ````
-<sub>O CEP inserido acima está mockado na aplicação de CEP</sub>
+<sub>O CEP inserido acima está mockado na aplicação de CEP.</sub>
 
 
 ### Criar um Filme
@@ -100,4 +100,4 @@ kubectl port-forward {Pod do rabbitmq-deployment.yaml} 15672:15672
     "cinemaId" : {ID do cinema que estreiará o filme}
 }
 ```
-
+<sub>O Cinema precisa existir para funcionar.</sub>
